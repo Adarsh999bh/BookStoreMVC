@@ -8,8 +8,8 @@
  * 
  **************************************************************************/
 
-const express=require('express');
-const productRoute=express.Router();
+const express = require('express');
+const productRoute = express.Router();
 const productController = require('../controller/productController');
 const Middleware = require('../middleware/userMiddleware');
 
@@ -26,7 +26,6 @@ productRoute.put(
 
 productRoute.get(
     "/get-products/:index",
-    Middleware.verifyJwt,
     productController.getProducts
 )
-module.exports=productRoute;
+module.exports = productRoute;

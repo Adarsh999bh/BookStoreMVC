@@ -8,19 +8,56 @@
  * 
  **************************************************************************/
 const cartService=require('../service/cartService');
+const logger=require('../../../config/logger');
 
 class CartService{
     createCart=(req,res)=>{
-
+        cartService.createCart(req.body,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("create cart successfull");
+                res.status(200).send(data);
+            }
+        })
     }
     updateCart=(req,res)=>{
-
+        cartService.updateCart(req.cartId,body,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("update cart successfull");
+                res.status(200).send(data);
+            }
+        })
     }
     deleteCart=(req,res)=>{
-
+        cartService.deleteCart(req.cartId,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("delete cart successfull");
+                res.status(204).send(data);
+            }
+        })
     }
     getCartForUser=(req,res)=>{
-
+        cartService.getItemsInCart(req.userId,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("get cart items successfull");
+                res.status(200).send(data);
+            }
+        })
     }
 }
 

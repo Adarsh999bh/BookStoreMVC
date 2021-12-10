@@ -55,7 +55,7 @@ exports.dbConnection = () => {
                                             productModel.insertOne(item, (err, data) => {
                                                 err ?
                                                     logger.error(err) :
-                                                    logger.info(data);
+                                                    console.log();
                                             })
                                         })
                                     }

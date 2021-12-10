@@ -1,6 +1,6 @@
 /* ************************************************************************
  * Execution        : 1. default node  cmd> nodemon userService.js              
- * @descrition      : set up the server and connects to the database
+ * @descrition      : manages all the services for users in service layer
  * @file            : userService.js
  * @author          : Adarsh Bhandary
  * @version         : 1.0
