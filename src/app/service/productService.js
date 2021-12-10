@@ -1,6 +1,6 @@
 const productModel=require('../model/productModel');
 
-class productService{
+class ProductService{
     getProducts=(index,callback)=>{
         productModel.getAllbooks((err,data)=>{
             if(err){
@@ -12,4 +12,4 @@ class productService{
         })
     }
 }
-module.exports=new productService();
+module.exports=new ProductService();

@@ -44,7 +44,7 @@ const orderSchema = mongoose.Schema(
 );
 const order = mongoose.model('BookStoreOrderDetail', orderSchema);
 
-class orderModel {
+class OrderModel {
     createOrder = (orderId, body, callback) => {
         let currentOrder = new order({
             ...body,
@@ -82,4 +82,4 @@ class orderModel {
             })
     }
 }
-module.exports = new orderModel();
+module.exports = new OrderModel();

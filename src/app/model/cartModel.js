@@ -39,7 +39,7 @@ const cartSchema = mongoose.Schema(
 
 const cart = mongoose.model("BookStoreCart", cartSchema);
 
-class cartModel {
+class CartModel {
     insertCart = (body, callback) => {
         let currentCart = new cart(body);
         currentCart.save((err, data) => {
@@ -83,4 +83,4 @@ class cartModel {
         )
     }
 }
-module.exports = new cartModel();
+module.exports = new CartModel();

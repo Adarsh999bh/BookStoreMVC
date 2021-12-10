@@ -72,6 +72,7 @@ userRoute.put(
 
 userRoute.delete(
   "/deleteuser/:userID",
+  Middleware.verifyJwt,
   userController.deleteUser
 );
 

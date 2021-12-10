@@ -42,7 +42,7 @@ const productSchema = mongoose.Schema(
 
 const product = mongoose.model("BookStoreProduct", productSchema);
 
-class productModel {
+class ProductModel {
   insertOne = (obj, callback) => {
     let prod = new product(obj);
     prod.save((err, data) => {
@@ -74,4 +74,4 @@ class productModel {
     })
   }
 }
-module.exports = new productModel();
+module.exports = new ProductModel();

@@ -16,33 +16,25 @@ const Middleware = require('../middleware/userMiddleware');
 cartRoute.post(
     "/create-cart",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    cartController.createCart
 );
 
 cartRoute.put(
     "/update-cart",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    cartController.updateCart
 );
 
 cartRoute.get(
     "/get-cart-items",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    cartController.getCartForUser
 );
 
 cartRoute.delete(
     "/delete-cart",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    cartController.deleteCart
 );
 
 module.exports=cartRoute;

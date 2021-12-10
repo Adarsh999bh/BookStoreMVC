@@ -16,20 +16,17 @@ const Middleware = require('../middleware/userMiddleware');
 productRoute.post(
     "/insert",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    productController.insertProduct
 );
 productRoute.put(
     "/update-product",
     Middleware.verifyJwt,
-    (req,res)=>{
-
-    }
+    productController.updateProducts
 );
 
 productRoute.get(
     "/get-products/:index",
+    Middleware.verifyJwt,
     productController.getProducts
 )
 module.exports=productRoute;
