@@ -47,5 +47,17 @@ class ProductController{
             }
         })
     }
+    getBookById=(req,res)=>{
+        productService.getBookById(req.body,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("get book by id succussfull");
+                res.status(200).send(data);
+            }
+        })
+    }
 }
 module.exports=new ProductController();

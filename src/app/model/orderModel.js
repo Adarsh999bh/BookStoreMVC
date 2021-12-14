@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 const orderSchema = mongoose.Schema(
     {
         orderId: {
-            type: String,
+            type: Number,
             required: true,
         },
         userId: {
@@ -47,8 +47,12 @@ const order = mongoose.model('BookStoreOrderDetail', orderSchema);
 class OrderModel {
     createOrder = (orderId, body, callback) => {
         let currentOrder = new order({
-            ...body,
+            productList:body.productList,
+            userId:body._id,
             orderId: orderId,
+            orderStatus:body.orderStatus,
+            totalPrice:body.totalPrice,
+            modeOfPayment:body.modeOfPayment
         })
         currentOrder.save((err, data) => {
             err ?
@@ -57,8 +61,8 @@ class OrderModel {
         })
     }
     updateOrder = (orderId, body, callback) => {
-        order.findByIdAndUpdate(
-            orderId,
+        order.findOneAndUpdate(
+            {orderId:orderId},
             {
                 ...body
             },

@@ -11,8 +11,8 @@
 //importing required modules
 const userModel=require('../model/userModel');
 const bcrypt=require('bcrypt');
-const {generateToken}=require('../../utility/jwt');
-const {createEmail}=require('../../utility/mailer');
+const {generateToken}=require('../../../utility/jwt');
+const {createEmail}=require('../../../utility/mailer');
 
 class UserService{
 
@@ -39,7 +39,7 @@ class UserService{
                         token:generateToken({
                             email:data.email,
                             _id:data._id,
-                            expiresIn:"1h"
+                            expiresIn:"1d"
                         })
                     });
                 }

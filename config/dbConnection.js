@@ -31,41 +31,41 @@ exports.dbConnection = () => {
         process.exit();
     });
 
-    let connection = mongoose.connection;
-    connection.once("open", () => {
-        connection.db.listCollections().toArray((error, collectionArray) => {
-            if (error) {
-                logger.error(error);
-            }
-            else {
-                for (let i = 0; i < collectionArray.length; i++) {
-                    if (collectionArray[i].name === 'bookstoreproducts') {
-                        connection.db.dropCollection('bookstoreproducts', (error, result) => {
-                            if (error) {
-                                logger.error(error)
-                            }
-                            else {
-                                logger.info('dropped collection BookStoreProduct');
-                                csvToJson.getJsonArry(process.env.CSV_FILE_PATH, (err, data) => {
-                                    if (err) {
-                                        logger.error(err);
-                                    }
-                                    else {
-                                        data.map((item) => {
-                                            productModel.insertOne(item, (err, data) => {
-                                                err ?
-                                                    logger.error(err) :
-                                                    console.log();
-                                            })
-                                        })
-                                    }
-                                });
-                            }
-                        })
-                    }
-                }
-            }
-        })
-    });
+    // let connection = mongoose.connection;
+    // connection.once("open", () => {
+    //     connection.db.listCollections().toArray((error, collectionArray) => {
+    //         if (error) {
+    //             logger.error(error);
+    //         }
+    //         else {
+    //             for (let i = 0; i < collectionArray.length; i++) {
+    //                 if (collectionArray[i].name === 'bookstoreproducts') {
+    //                     connection.db.dropCollection('bookstoreproducts', (error, result) => {
+    //                         if (error) {
+    //                             logger.error(error)
+    //                         }
+    //                         else {
+    //                             logger.info('dropped collection BookStoreProduct');
+    //                             csvToJson.getJsonArry(process.env.CSV_FILE_PATH, (err, data) => {
+    //                                 if (err) {
+    //                                     logger.error(err);
+    //                                 }
+    //                                 else {
+    //                                     data.map((item) => {
+    //                                         productModel.insertOne(item, (err, data) => {
+    //                                             err ?
+    //                                                 logger.error(err) :
+    //                                                 console.log();
+    //                                         })
+    //                                     })
+    //                                 }
+    //                             });
+    //                         }
+    //                     })
+    //                 }
+    //             }
+    //         }
+    //     })
+    // });
 }
 

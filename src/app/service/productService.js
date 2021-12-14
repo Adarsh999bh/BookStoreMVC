@@ -44,5 +44,15 @@ class ProductService {
             }
         })
     }
+    getBookById=(body,callback)=>{
+        productModel.getBookById(body._id,(err,data)=>{
+            if (err) {
+                callback(err, null)
+            }
+            else {
+                callback(null, data)
+            }
+        })
+    }
 }
 module.exports = new ProductService();

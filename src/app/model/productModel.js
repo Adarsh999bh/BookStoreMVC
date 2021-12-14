@@ -73,5 +73,12 @@ class ProductModel {
         callback(null, data);
     })
   }
+  getBookById = (bookId, callback) => {
+    product.findById(bookId, (err, data) => {
+      err ?
+        callback(err, null) :
+        callback(null, data);
+    })
+  }
 }
 module.exports = new ProductModel();

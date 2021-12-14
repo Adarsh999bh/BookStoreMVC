@@ -30,6 +30,10 @@ const cartSchema = mongoose.Schema(
             default: 'open',
             required: true,
         },
+        isWishList: {
+            type: Boolean,
+            required: true,
+        }
     },
     {
         timestamps: true,
@@ -41,7 +45,13 @@ const cart = mongoose.model("BookStoreCart", cartSchema);
 
 class CartModel {
     insertCart = (body, callback) => {
-        let currentCart = new cart(body);
+        let currentCart = new cart({
+            userId: body._id,
+            productId: body.productId,
+            quantity: body.quantity,
+            cartStatus: body.cartStatus,
+            isWishList: body.isWishList,
+        });
         currentCart.save((err, data) => {
             err ?
                 callback(err, null) :
@@ -52,7 +62,11 @@ class CartModel {
         cart.findByIdAndUpdate(
             cartId,
             {
-                ...body
+                userId: body._id,
+                productId: body.productId,
+                quantity: body.quantity,
+                cartStatus: body.cartStatus,
+                isWishList: body.isWishList,
             },
             { new: true },
             (err, data) => {
@@ -73,14 +87,41 @@ class CartModel {
         )
     }
     getItemsInCart = (userId, callback) => {
-        cart.find(
-            { userId: userId },
-            (err, data) => {
-                err ?
-                    callback(err, null) :
-                    callback(null, data);
+        cart.aggregate([
+            {
+                $match: {
+                    $and: [
+                        { userId: new mongoose.Types.ObjectId(userId) },
+                        { isWishList: false }
+                    ]
+                }
+            },
+            {
+                $group: {
+                    _id: "$productId", quantity: { $sum: "$quantity" }
+                }
+            },
+            {
+                $project:{
+                    prodObjId: { "$toObjectId": "$_id" },
+                    quantity:1,
+                    _id:0
+                }
+            },
+            {
+                $lookup:{
+                    from:"bookstoreproducts",
+                    localField:"prodObjId",
+                    foreignField:"_id",
+                    as:"product"
+                }
             }
-        )
+        ])
+        .then(data => {
+            callback(null, data)
+        }).catch(err => {
+            callback(err, null)
+        })
     }
 }
 module.exports = new CartModel();

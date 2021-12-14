@@ -24,10 +24,16 @@ const dbconn=require('./config/dbConnection');
 const logger=require('./config/logger');
 
 //importing user routes
-//const userRouter=require('./app/routes/userRoutes');
+const userRouter=require('./src/app/routes/userRoutes');
 
 //importing product routes
 const productRoute=require('./src/app/routes/productRoutes');
+
+//importing cart routes
+const cartRouter=require('./src/app/routes/cartRoutes');
+
+//importing order routes
+const orderRouter=require('./src/app/routes/orderRoutes');
 
 //creating an express app
 const app=express();
@@ -47,10 +53,16 @@ app
 app.use(cors())
 
 //adding user router to app
-//app.use('/user',userRouter);
+app.use('/user',userRouter);
 
-//adding product route
+//adding product route to app
 app.use('/product',productRoute)
+
+//adding cart routes to app
+app.use('/cart',cartRouter);
+
+//adding order route to app
+app.use('/order',orderRouter);
 
 /**
  * @description creates server and listens at specified port also connects the

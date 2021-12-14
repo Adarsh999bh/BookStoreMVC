@@ -15,7 +15,7 @@ class OrderService {
     createOrder = (body, callback) => {
 
         //generate random orderID
-        let orderID = ''
+        let orderID = Date.now();
 
         orderModel.createOrder(orderID, body, (err, data) => {
             if (err) {
@@ -26,8 +26,8 @@ class OrderService {
             }
         })
     }
-    updateOrder = (orderID, body, callback) => {
-        orderModel.updateOrder(orderID, body, (err, data) => {
+    updateOrder = (body, callback) => {
+        orderModel.updateOrder(body.orderId, body, (err, data) => {
             if (err) {
                 callback(err, null)
             }
@@ -37,7 +37,7 @@ class OrderService {
         })
     }
     getAllorders = (body, callback) => {
-        orderModel.getAllOrderHistory(body.userID, (err, callback) => {
+        orderModel.getAllOrderHistory(body._id, (err, data) => {
             if (err) {
                 callback(err, null)
             }

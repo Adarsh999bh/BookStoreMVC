@@ -24,7 +24,7 @@ class CartService{
         })
     }
     updateCart=(req,res)=>{
-        cartService.updateCart(req.cartId,body,(err,data)=>{
+        cartService.updateCart(req.body.cartId,req.body,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);
@@ -36,7 +36,7 @@ class CartService{
         })
     }
     deleteCart=(req,res)=>{
-        cartService.deleteCart(req.cartId,(err,data)=>{
+        cartService.deleteCart(req.body.cartId,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);
@@ -48,7 +48,7 @@ class CartService{
         })
     }
     getCartForUser=(req,res)=>{
-        cartService.getItemsInCart(req.userId,(err,data)=>{
+        cartService.getItemsInCart(req.body._id,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);

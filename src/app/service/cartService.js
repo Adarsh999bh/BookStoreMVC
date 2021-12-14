@@ -22,8 +22,8 @@ class CartService {
             }
         })
     }
-    updateCart = (cartID, body, callback) => {
-        cartModel.updateCart(cartID, body, (err, data) => {
+    updateCart = (cartId, body, callback) => {
+        cartModel.updateCart(cartId, body, (err, data) => {
             if (err) {
                 callback(err, null)
             }
@@ -42,8 +42,8 @@ class CartService {
             }
         })
     }
-    deleteCart = (cartID, callback) => {
-        cartModel.deletecart(cartID, (err, data) => {
+    deleteCart = (cartId, callback) => {
+        cartModel.deletecart(cartId, (err, data) => {
             if (err) {
                 callback(err, null)
             }

@@ -24,7 +24,7 @@ class OrderController{
         })
     }
     updateOrder=(req,res)=>{
-        orderService.updateOrder(req.orderID,req.body,(err,data)=>{
+        orderService.updateOrder(req.body,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);

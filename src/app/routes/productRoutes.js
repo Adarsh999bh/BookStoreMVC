@@ -26,6 +26,12 @@ productRoute.put(
 
 productRoute.get(
     "/get-products/:index",
+    Middleware.verifyJwt,
     productController.getProducts
+)
+productRoute.get(
+    "/get-product",
+    Middleware.verifyJwt,
+    productController.getBookById
 )
 module.exports = productRoute;
