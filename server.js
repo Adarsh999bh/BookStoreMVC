@@ -35,6 +35,9 @@ const cartRouter=require('./src/app/routes/cartRoutes');
 //importing order routes
 const orderRouter=require('./src/app/routes/orderRoutes');
 
+//importing address routes
+const addressRouter=require('./src/app/routes/addressRoutes')
+
 //creating an express app
 const app=express();
 
@@ -63,6 +66,9 @@ app.use('/cart',cartRouter);
 
 //adding order route to app
 app.use('/order',orderRouter);
+
+//adding address route to app
+app.use('/address',addressRouter);
 
 /**
  * @description creates server and listens at specified port also connects the
