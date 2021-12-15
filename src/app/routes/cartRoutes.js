@@ -36,5 +36,10 @@ cartRoute.delete(
     Middleware.verifyJwt,
     cartController.deleteCart
 );
+cartRoute.delete(
+    "/delete-one",
+    Middleware.verifyJwt,
+    cartController.deleteCart
+);
 
 module.exports=cartRoute;
