@@ -18,9 +18,9 @@ class ProductService {
                 callback(err, null);
             }
             else {
-                let page=parseInt(index);
-                page=(page-1)*12;
-                callback(null, data.slice(index, index + 12));
+                let page = parseInt(index);
+                page = (page - 1) * 12;
+                callback(null, data.slice(page, page + 12));
             }
         })
     }
@@ -44,13 +44,26 @@ class ProductService {
             }
         })
     }
-    getBookById=(body,callback)=>{
-        productModel.getBookById(body._id,(err,data)=>{
+    getBookById = (body, callback) => {
+        productModel.getBookById(body._id, (err, data) => {
             if (err) {
                 callback(err, null)
             }
             else {
                 callback(null, data)
+            }
+        })
+    }
+    searchBooks = (body, callback) => {
+        productModel.getAllbooks((err, data) => {
+            if (err) {
+                callback(err, null);
+            }
+            else {
+                let filteredData = data.filter((item) => {
+                    return item.productTitle.toLowerCase().includes(body.searchTxt.toLowerCase());
+                })
+                callback(null, filteredData);
             }
         })
     }

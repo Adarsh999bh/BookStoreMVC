@@ -59,5 +59,17 @@ class ProductController{
             }
         })
     }
+    searchBook=(req,res)=>{
+        productService.searchBooks(req.body,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("search book succussfull");
+                res.status(200).send(data);
+            }
+        })
+    }
 }
 module.exports=new ProductController();
