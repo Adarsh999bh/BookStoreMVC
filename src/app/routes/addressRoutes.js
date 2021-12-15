@@ -20,7 +20,7 @@ addressRoute.post(
     addressController.createAddress
 );
 addressRoute.get(
-    "get-address",
+    "/get-address",
     Middleware.verifyJwt,
     addressController.getAddress
 )

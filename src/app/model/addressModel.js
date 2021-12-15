@@ -48,24 +48,25 @@ const addressSchema = mongoose.Schema({
 const address = mongoose.model("BookStoreAddress", addressSchema);
 
 class addressModel {
+    
     createAddress = (body, callback) => {
         address.findOne({ userId: body._id }, (err, data) => {
-            let addressData = new address({
-                userId: body._id,
-                userName: body.userName,
-                addressType: body.addressType,
-                landmark: body.landmark,
-                city: body.city,
-                address: body.address,
-                locality: body.locality,
-                pincode: body.pincode,
-                phNo: body.phNo
-            })
             if (err) {
                 callback(err, null);
             }
             else {
                 if (!data) {
+                    let addressData = new address({
+                        userId: body._id,
+                        userName: body.userName,
+                        addressType: body.addressType,
+                        landmark: body.landmark,
+                        city: body.city,
+                        address: body.address,
+                        locality: body.locality,
+                        pincode: body.pincode,
+                        phNo: body.phNo
+                    })
                     addressData.save((err, data) => {
                         err ?
                             callback(err, null) :
