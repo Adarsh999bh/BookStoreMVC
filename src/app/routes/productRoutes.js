@@ -34,4 +34,9 @@ productRoute.get(
     Middleware.verifyJwt,
     productController.getBookById
 )
+productRoute.post(
+    "/search",
+    Middleware.verifyJwt,
+    productController.searchBook
+)
 module.exports = productRoute;
