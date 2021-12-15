@@ -36,13 +36,25 @@ class CartService{
         })
     }
     deleteCart=(req,res)=>{
-        cartService.deleteCart(req.body.cartId,(err,data)=>{
+        cartService.deleteCart(req.body.productId,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);
             }
             else{
                 logger.info("delete cart successfull");
+                res.status(204).send(data);
+            }
+        })
+    }
+    deleteOne=(req,res)=>{
+        cartService.deleteOne(req.body.productId,(err,data)=>{
+            if(err){
+                logger.error(err);
+                res.status(500).send(err);
+            }
+            else{
+                logger.info("delete one successfull");
                 res.status(204).send(data);
             }
         })
