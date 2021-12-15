@@ -22,8 +22,8 @@ class CartService {
             }
         })
     }
-    updateCart = (cartId, body, callback) => {
-        cartModel.updateCart(cartId, body, (err, data) => {
+    updateCart = (productId, body, callback) => {
+        cartModel.updateCart(productId, body, (err, data) => {
             if (err) {
                 callback(err, null)
             }
@@ -38,12 +38,31 @@ class CartService {
                 callback(err, null)
             }
             else {
+                callback(null,data.map((item)=>{
+                    let obj={}
+                    obj.quantity=item.quantity;
+                    obj._id=item.prodObjId;
+                    obj.productTitle=item.product[0].productTitle;
+                    obj.price=item.product[0].price;
+                    obj.author=item.product[0].author;
+                    obj.image=item.product[0].image;
+                    return obj;
+                }));
+            }
+        })
+    }
+    deleteCart = (productId, callback) => {
+        cartModel.deletecart(productId, (err, data) => {
+            if (err) {
+                callback(err, null)
+            }
+            else {
                 callback(null, data)
             }
         })
     }
-    deleteCart = (cartId, callback) => {
-        cartModel.deletecart(cartId, (err, data) => {
+    deleteOne = (productId, callback) => {
+        cartModel.deleteOne(productId, (err, data) => {
             if (err) {
                 callback(err, null)
             }
