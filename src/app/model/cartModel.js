@@ -76,15 +76,19 @@ class CartModel {
             }
         )
     }
-    deletecart = (cartId, callback) => {
-        cart.findByIdAndDelete(
-            cartId,
-            (err, data) => {
-                err ?
-                    callback(err, null) :
-                    callback(null, data);
-            }
-        )
+    deletecart = (productId, callback) => {
+        cart.deleteMany({ productId: productId }, (err, data) => {
+            err ?
+                callback(err, null) :
+                callback(null, data);
+        })
+    }
+    deleteOne = (productId, callback) => {
+        cart.findOneAndDelete({ productId: productId }, (err, data) => {
+            err ?
+                callback(err, null) :
+                callback(null, data);
+        })
     }
     getItemsInCart = (userId, callback) => {
         cart.aggregate([
@@ -102,26 +106,26 @@ class CartModel {
                 }
             },
             {
-                $project:{
+                $project: {
                     prodObjId: { "$toObjectId": "$_id" },
-                    quantity:1,
-                    _id:0
+                    quantity: 1,
+                    _id: 0
                 }
             },
             {
-                $lookup:{
-                    from:"bookstoreproducts",
-                    localField:"prodObjId",
-                    foreignField:"_id",
-                    as:"product"
+                $lookup: {
+                    from: "bookstoreproducts",
+                    localField: "prodObjId",
+                    foreignField: "_id",
+                    as: "product"
                 }
             }
         ])
-        .then(data => {
-            callback(null, data)
-        }).catch(err => {
-            callback(err, null)
-        })
+            .then(data => {
+                callback(null, data)
+            }).catch(err => {
+                callback(err, null)
+            })
     }
 }
 module.exports = new CartModel();
