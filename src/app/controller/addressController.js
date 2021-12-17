@@ -11,6 +11,13 @@ const addressService=require('../service/addressService');
 const logger=require('../../../config/logger');
 
 class AddressController{
+
+    /**
+     * @description handles request and response for create address and updates 
+     * if address already exists
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     createAddress=(req,res)=>{
         addressService.createAddress(req.body,(err,data)=>{
             if(err){
@@ -23,6 +30,12 @@ class AddressController{
             }
         })
     }
+
+    /**
+     * @description handles request and response for get user address
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     getAddress=(req,res)=>{
         addressService.getAddress(req.body,(err,data)=>{
             if(err){

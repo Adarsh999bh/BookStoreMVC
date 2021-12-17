@@ -7,8 +7,10 @@
  * @since           : 8-dec-2021
  * 
  **************************************************************************/
+//importing required modules
 const mongoose = require('mongoose');
 
+//creating cart schema
 const cartSchema = mongoose.Schema(
     {
         userId: {
@@ -40,10 +42,16 @@ const cartSchema = mongoose.Schema(
     }
 );
 
-
+//creating cart model
 const cart = mongoose.model("BookStoreCart", cartSchema);
 
 class CartModel {
+
+    /**
+     * @description inserts a item into cart
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     insertCart = (body, callback) => {
         let currentCart = new cart({
             userId: body._id,
@@ -58,6 +66,12 @@ class CartModel {
                 callback(null, data);
         })
     }
+    /**
+     * @description updates the cart
+     * @param {String} cartId
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     updateCart = (cartId, body, callback) => {
         cart.findByIdAndUpdate(
             cartId,
@@ -76,6 +90,12 @@ class CartModel {
             }
         )
     }
+
+    /**
+     * @description deletes the item in cart by product id
+     * @param {String} productId 
+     * @param {callback} callback 
+     */
     deletecart = (productId, callback) => {
         cart.deleteMany({ productId: productId }, (err, data) => {
             err ?
@@ -83,6 +103,12 @@ class CartModel {
                 callback(null, data);
         })
     }
+
+    /**
+     * @description deletes the item in cart by product Id
+     * @param {String} productId 
+     * @param {callback} callback 
+     */
     deleteOne = (productId, callback) => {
         cart.findOneAndDelete({ productId: productId }, (err, data) => {
             err ?
@@ -90,6 +116,13 @@ class CartModel {
                 callback(null, data);
         })
     }
+
+    /**
+     * @description aggregates the cart data by user id and also uses 
+     * lookup to frtch details of product
+     * @param {String} userId 
+     * @param {callback} callback 
+     */
     getItemsInCart = (userId, callback) => {
         cart.aggregate([
             {
@@ -128,4 +161,6 @@ class CartModel {
             })
     }
 }
+
+//exporting CartModel
 module.exports = new CartModel();

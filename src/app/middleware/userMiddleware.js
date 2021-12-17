@@ -7,9 +7,18 @@
  * @since           : 9-Dec-2021
  * 
  **************************************************************************/
+//importing required modules
 const jwt=require('../../../utility/jwt');
 
 class Middleware{
+
+    /**
+     * @description verifies the JWT token and sends bod response if failed or else
+     *  calls next to continue execution.
+     * @param {Object} req 
+     * @param {Object} res 
+     * @param {Function} next 
+     */
     verifyJwt=(req,res,next)=>{
         let bearerToken = req.headers.authorization || req.params.token;
         if(!bearerToken){

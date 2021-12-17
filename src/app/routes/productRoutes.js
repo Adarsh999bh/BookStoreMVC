@@ -1,6 +1,6 @@
 /* ************************************************************************
  * Execution        : 1. default node  cmd> nodemon productRoutes.js              
- * @descrition      : specifies all the user routes
+ * @descrition      : specifies all the product routes
  * @file            : productRoutes.js
  * @author          : Adarsh Bhandary
  * @version         : 1.0

@@ -12,6 +12,12 @@
 const addressModel = require("../model/addressModel");
 
 class addressService {
+
+    /**
+     * @description addes address to the address model
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     createAddress = (body, callback) => {
         addressModel.createAddress(body, (err, data) => {
             err ?
@@ -19,6 +25,12 @@ class addressService {
                 callback(null, data);
         })
     }
+
+    /**
+     * @description gets the previous updated address of user
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     getAddress = (body, callback) => {
         addressModel.getAddress(body._id, (err, data) => {
             err ?
@@ -28,4 +40,5 @@ class addressService {
     }
 }
 
+//exporting addressService
 module.exports=new addressService();

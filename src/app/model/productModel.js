@@ -7,8 +7,10 @@
  * @since           : 8-dec-2021
  * 
  **************************************************************************/
+//importing required modules
 const mongoose = require('mongoose');
 
+//creating productSchema for book store
 const productSchema = mongoose.Schema(
   {
     productTitle: {
@@ -39,10 +41,15 @@ const productSchema = mongoose.Schema(
   }
 );
 
-
+//creating productModel
 const product = mongoose.model("BookStoreProduct", productSchema);
 
 class ProductModel {
+  /**
+   * @description inserts a product in productModel
+   * @param {Object} obj 
+   * @param {callback} callback 
+   */
   insertOne = (obj, callback) => {
     let prod = new product(obj);
     prod.save((err, data) => {
@@ -51,6 +58,13 @@ class ProductModel {
         callback(null, data);
     })
   }
+
+  /**
+   * @description updates the product details
+   * @param {String} productId 
+   * @param {Object} body 
+   * @param {callback} callback 
+   */
   updateOne = (productId, body, callback) => {
     product.findByIdAndUpdate(
       productId,
@@ -66,6 +80,11 @@ class ProductModel {
     )
 
   }
+  
+  /**
+   * @description gets all products in the model
+   * @param {callback} callback 
+   */
   getAllbooks = (callback) => {
     product.find({}, (err, data) => {
       err ?
@@ -73,6 +92,12 @@ class ProductModel {
         callback(null, data);
     })
   }
+
+  /**
+   * @description gets book by its id
+   * @param {String} bookId 
+   * @param {callback} callback 
+   */
   getBookById = (bookId, callback) => {
     product.findById(bookId, (err, data) => {
       err ?
@@ -81,4 +106,6 @@ class ProductModel {
     })
   }
 }
+
+//exporting ProductModel
 module.exports = new ProductModel();

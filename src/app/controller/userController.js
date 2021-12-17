@@ -14,6 +14,11 @@ const logger = require('../../../config/logger');
 
 class UserController{
 
+    /**
+     * @description handels the req and response for user login
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     loginUser=(req,res)=>{
         let body = req.body;
         userService.loginUser(body,(err,data)=>{
@@ -31,6 +36,12 @@ class UserController{
 
     };
 
+    /**
+     * @description handles request and response for create user
+     * @param {Object} req 
+     * @param {Object} res 
+     * @returns res
+     */
     createUser=(req,res)=>{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -52,6 +63,11 @@ class UserController{
         });
     };
 
+    /**
+     * @description handles request and response for user update details
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     updateUser=(req,res)=>{
         const errors = validationResult(req);
         if (!errors.isEmpty()) {
@@ -74,6 +90,11 @@ class UserController{
         });
     };
 
+    /**
+     * @description handles request and response for deleting user
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     deleteUser=(req,res)=>{
         let userID=req.params.userID;
         userService.deleteUser(userID,(err,data)=>{
@@ -90,6 +111,11 @@ class UserController{
         });
     };
 
+     /**
+     * @description handles request and response to get user details
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     getUser=(req,res)=>{
         userService.getUser(req.body.email,(err,data)=>{
             if(err){
@@ -105,6 +131,11 @@ class UserController{
         });
     };
 
+    /**
+     * @description handles request and response forgot password
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     forgotpass=(req,res)=>{
         userService.forgotpass(req.body.email,(err,data)=>{
             if(err){
@@ -117,6 +148,12 @@ class UserController{
             }
         });
     };
+
+    /**
+     * @description handles request and response for reset password
+     * @param {Object} req 
+     * @param {Object} res 
+     */
     reset=(req,res)=>{
         userService.reset(req.body,(err,data)=>{
             if(err){
@@ -131,4 +168,5 @@ class UserController{
     };
 }
 
+//exporting userController
 module.exports=new UserController();

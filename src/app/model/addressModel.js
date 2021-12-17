@@ -7,8 +7,11 @@
  * @since           : 8-dec-2021
  * 
  **************************************************************************/
+
+//importing required module
 const mongoose = require('mongoose');
 
+//creating address Schema
 const addressSchema = mongoose.Schema({
     userId: {
         type: mongoose.Schema.Types.ObjectId,
@@ -45,10 +48,17 @@ const addressSchema = mongoose.Schema({
     }
 })
 
+//creating address model
 const address = mongoose.model("BookStoreAddress", addressSchema);
 
 class addressModel {
     
+    /**
+     * @description creates the address for user if doesnt exist otherwise update 
+     * the address for the same user
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     createAddress = (body, callback) => {
         address.findOne({ userId: body._id }, (err, data) => {
             if (err) {
@@ -98,6 +108,12 @@ class addressModel {
             }
         })
     }
+
+    /**
+     * @descriptiongets the address of specific userId
+     * @param {String} userId 
+     * @param {callback} callback 
+     */
     getAddress = (userId, callback) => {
         address.findOne(
             { userId: userId },

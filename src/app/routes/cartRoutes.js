@@ -1,6 +1,6 @@
 /* ************************************************************************
  * Execution        : 1. default node  cmd> nodemon cartRoutes.js              
- * @descrition      : specifies all the address routes
+ * @descrition      : specifies all the cart routes
  * @file            : cartRoutes.js
  * @author          : Adarsh Bhandary
  * @version         : 1.0

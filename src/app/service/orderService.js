@@ -12,6 +12,12 @@
 const orderModel = require('../model/orderModel');
 
 class OrderService {
+
+    /**
+     * @description calls ordermodel create order and generates orderId
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     createOrder = (body, callback) => {
 
         //generate random orderID
@@ -26,6 +32,12 @@ class OrderService {
             }
         })
     }
+
+    /**
+     * @description updates the order by using orderId
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     updateOrder = (body, callback) => {
         orderModel.updateOrder(body.orderId, body, (err, data) => {
             if (err) {
@@ -36,6 +48,12 @@ class OrderService {
             }
         })
     }
+
+    /**
+     * @description gets all order history from model for particular userid
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     getAllorders = (body, callback) => {
         orderModel.getAllOrderHistory(body._id, (err, data) => {
             if (err) {
@@ -48,4 +66,5 @@ class OrderService {
     }
 }
 
+//exporting OrderService
 module.exports = new OrderService();

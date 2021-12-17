@@ -10,6 +10,7 @@
 //importing mongoose
 const mongoose = require('mongoose');
 
+//creating order Schema
 const orderSchema = mongoose.Schema(
     {
         orderId: {
@@ -38,9 +39,17 @@ const orderSchema = mongoose.Schema(
         timestamps: true,
     }
 );
+
+//creating order model
 const order = mongoose.model('BookStoreOrderDetail', orderSchema);
 
 class OrderModel {
+    /**
+     * @description creates order
+     * @param {String} orderId 
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     createOrder = (orderId, body, callback) => {
         let currentOrder = new order({
             productList:body.productList,
@@ -56,6 +65,13 @@ class OrderModel {
                 callback(null, data);
         })
     }
+
+    /**
+     * updates the order by order id
+     * @param {String} orderId 
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     updateOrder = (orderId, body, callback) => {
         order.findOneAndUpdate(
             {orderId:orderId},
@@ -70,6 +86,12 @@ class OrderModel {
             }
         )
     }
+
+    /**
+     * @description gets all the order history of particular user
+     * @param {String} userId 
+     * @param {callback} callback 
+     */
     getAllOrderHistory = (userId, callback) => {
         order.find(
             {
@@ -82,4 +104,6 @@ class OrderModel {
             })
     }
 }
+
+//exporting OrderModel
 module.exports = new OrderModel();

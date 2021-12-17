@@ -12,6 +12,11 @@
 const productModel = require('../model/productModel');
 
 class ProductService {
+    /**
+     * @description gets the products based on page index
+     * @param {String} index 
+     * @param {callback} callback 
+     */
     getProducts = (index, callback) => {
         productModel.getAllbooks((err, data) => {
             if (err) {
@@ -24,6 +29,12 @@ class ProductService {
             }
         })
     }
+    
+    /**
+     * @description calls the product model insertOne method to insert product
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     insertProduct = (body, callback) => {
         productModel.insertOne(body, (err, data) => {
             if (err) {
@@ -34,6 +45,12 @@ class ProductService {
             }
         })
     }
+
+    /**
+     * @description updates product model function is called
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     updateProduct = (body, callback) => {
         productModel.updateOne(body.productId, body.data, (err, data) => {
             if (err) {
@@ -44,6 +61,12 @@ class ProductService {
             }
         })
     }
+    
+    /**
+     * @description get method of model is called to get one book by its id
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     getBookById = (body, callback) => {
         productModel.getBookById(body._id, (err, data) => {
             if (err) {
@@ -54,6 +77,13 @@ class ProductService {
             }
         })
     }
+
+    /**
+     * @description calls getAllBoook method of product model and searches for the book 
+     * which is matching text for the search text sent by request body
+     * @param {Object} body 
+     * @param {callback} callback 
+     */
     searchBooks = (body, callback) => {
         productModel.getAllbooks((err, data) => {
             if (err) {
@@ -68,4 +98,6 @@ class ProductService {
         })
     }
 }
+
+//exporting ProductService
 module.exports = new ProductService();
