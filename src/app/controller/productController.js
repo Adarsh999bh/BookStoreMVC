@@ -18,7 +18,7 @@ class ProductController{
      * @param {Object} res 
      */
     getProducts=(req,res)=>{
-        productService.getProducts(req.params.index,(err,data)=>{
+        productService.getProducts(req.params.index,req.params.sortid,(err,data)=>{
             if(err){
                 logger.error(err);
                 res.status(500).send(err);

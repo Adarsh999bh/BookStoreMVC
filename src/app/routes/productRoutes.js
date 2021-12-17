@@ -25,7 +25,7 @@ productRoute.put(
 );
 
 productRoute.get(
-    "/get-products/:index",
+    "/get-products/:index/:sortid",
     Middleware.verifyJwt,
     productController.getProducts
 )

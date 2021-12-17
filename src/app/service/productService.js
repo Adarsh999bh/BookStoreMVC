@@ -17,19 +17,29 @@ class ProductService {
      * @param {String} index 
      * @param {callback} callback 
      */
-    getProducts = (index, callback) => {
+    getProducts = (index, sortIndex, callback) => {
         productModel.getAllbooks((err, data) => {
+
             if (err) {
                 callback(err, null);
             }
             else {
                 let page = parseInt(index);
                 page = (page - 1) * 12;
+                if(sortIndex==-1){
+                    data.sort((a, b) => a.price - b.price);
+                }
+                else if(sortIndex==1){
+                    data.sort((a, b) => b.price - a.price);
+                }
+                else{
+                    return callback(null, data.slice(page, page + 12));
+                }
                 callback(null, data.slice(page, page + 12));
-            }
+          }
         })
     }
-    
+
     /**
      * @description calls the product model insertOne method to insert product
      * @param {Object} body 
@@ -61,7 +71,7 @@ class ProductService {
             }
         })
     }
-    
+
     /**
      * @description get method of model is called to get one book by its id
      * @param {Object} body 
