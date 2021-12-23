@@ -7,7 +7,9 @@
  * @since           : 8-Dec-2021
  * 
  **************************************************************************/
+
+require('dotenv').config();
 //exporting mongodb database url
 module.exports = {
-    url: 'mongodb://localhost:27017/BookStoreApp'
+    url: process.env.MONGO_DB_URL
 }
